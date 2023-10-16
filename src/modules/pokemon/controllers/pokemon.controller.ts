@@ -12,30 +12,35 @@ import {
 import { PokemonService } from '../services/pokemon.service';
 import { CreateDtoPokemon } from '../dto/create-pokemon.dto';
 import { UpdateDtoPokemon } from '../dto/update-pokemon.dto';
+import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id/parse-mongo-id.pipe';
 
 @Controller('pokemon')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
   @Post()
   // @HttpCode(200)
-  // @HttpCode(HttpStatus.OK)
+  // @HttpCode(HttpStatus.OK) // Para cuando sea exitoso, se manda el codigo seleccionado 
   create(@Body() createDtoPokemon: CreateDtoPokemon) {
     return this.pokemonService.create(createDtoPokemon);
   }
+  
   @Get(':term')
   findOne(@Param('term') term: string) {
     return this.pokemonService.findOne(term);
   }
+
   @Get()
   findAll() {
-    this.pokemonService.findAll();
+    return this.pokemonService.findAll();
   }
   @Patch(':term')
   update(@Param('term') term: string, @Body() upadteDtoPokemon: UpdateDtoPokemon) {
     return this.pokemonService.update(term, upadteDtoPokemon);
   }
-  @Delete()
-  remove() {
-    this.pokemonService.remove();
+
+  @Delete(':id')
+  removeOne(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.pokemonService.removeOne(id);
   }
+
 }
