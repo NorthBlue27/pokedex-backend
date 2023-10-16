@@ -14,4 +14,4 @@ npm install
 ```
 npm i -g @nestjs/cli
 ```
-3. Cambiar los datos para acceder a la base de datos (Mongo en este caso)
+3. Cambiar credenciales de la base de datos (Mongo en este caso)
