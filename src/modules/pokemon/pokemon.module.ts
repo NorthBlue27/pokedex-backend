@@ -16,5 +16,6 @@ import { PokemonMg, PokemonSchema } from './pokemon.entity';
       },
     ]),
   ],
+  exports: [MongooseModule]
 })
 export class PokemonModule {}

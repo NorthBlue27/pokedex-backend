@@ -15,3 +15,7 @@ npm install
 npm i -g @nestjs/cli
 ```
 3. Cambiar credenciales de la base de datos (Mongo en este caso)
+4. Reconstruir la base de datos con la semilla
+```
+http://localhost:3000/api/seed/(cantidad)
+```
