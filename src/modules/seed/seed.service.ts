@@ -5,19 +5,21 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PokemonMg } from '../pokemon/pokemon.entity';
 import { Model } from 'mongoose';
 import { CreateDtoPokemon } from '../pokemon/dto/create-pokemon.dto';
+import { AxiosAdapter } from 'src/common/adapters/axios.adapter';
 
 @Injectable()
 export class SeedService {
   constructor(
     @InjectModel(PokemonMg.name)
     private readonly pokemonModel: Model<PokemonMg>,
+    private readonly http: AxiosAdapter
   ) {}
   private readonly axios: AxiosInstance = axios;
 
   async executeSeed(limit: number) {
     await this.pokemonModel.deleteMany();
-
-    const { data } = await this.axios.get<PokeResponse>(
+    // Implementado el adaptador de axios (providers)
+    const data = await this.http.get<PokeResponse>(
       `https://pokeapi.co/api/v2/pokemon?limit=${limit}`,
     );
 
