@@ -17,7 +17,6 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
-  // SI NO LO TIENE, LANZA UN ERROR
   private default_limit: number;
 
   constructor(
@@ -25,7 +24,8 @@ export class PokemonService {
     private readonly pokemonModel: Model<PokemonMg>,
     private readonly configService: ConfigService,
   ) {
-    this.default_limit = this.configService.getOrThrow<number>('DEFAULT_LIMIT');
+    // SI NO LO TIENE, LANZA UN ERROR
+    this.default_limit = this.configService.getOrThrow<number>('defaultLimit');
   }
 
   async create(createDtoPokemon: CreateDtoPokemon) {
